@@ -1,5 +1,5 @@
 const room = document.getElementById('room');
-const apiUrl = 'http://localhost:8000/api/client/rooms';
+const apiUrl = 'http://localhost:8000/api/admin/rooms';
 
 fetch(apiUrl)
     .then(response => {
@@ -9,24 +9,10 @@ fetch(apiUrl)
         return response.json();
     })
     .then(data => {
-        const dataByName = {};
-
-        data.forEach(item => {
-            if (dataByName[item.room_type]) {
-                dataByName[item.room_type].push(item);
-            } else {
-                dataByName[item.room_type] = [item];
-            }
+        data.forEach(room => {
+            console.log(room);
         });
 
-        for (const roomType in dataByName) {
-            if (dataByName.hasOwnProperty(roomType)) {
-                const roomData = dataByName[roomType][0];
-                const rooms = dataByName[roomType].length;
-                const card = createRoomCard(roomData, rooms);
-                room.append(card);
-            }
-        }
     })
     .catch(error => {
         console.error('Fetch error:', error);
@@ -35,7 +21,7 @@ fetch(apiUrl)
 function createRoomCard(data, rooms) {
     const card = document.createElement('a');
     card.href = './booking.html';
-    card.classList.add('bg-blue-500', 'p-6', 'w-[30%]', 'rounded-xl', 'text-white','my-3','max-sm:w-[95%]');
+    card.classList.add('bg-blue-500', 'p-6', 'w-[20%]', 'rounded-xl', 'text-white','my-3','max-sm:w-[95%]');
 
     const img = document.createElement('img');
     img.classList.add('rounded-lg', 'w-full',);
