@@ -30,7 +30,10 @@ function createTable(data) {
             <td>${item.room_type}</td>
             <td>${item.duration}</td>
             <td>${month[dateObject.getMonth()]} ${getDayWithSuffix(dateObject.getDate())}</td>
-            <td><button onclick="AcceptData(${item.id},'${item.name}','${item.email}','${item.phone}','${item.room_type}','${item.duration}','${item.applied_date}')">accept</button></td>
+            <td>
+            <button onclick="AcceptData(${item.id},'${item.name}','${item.email}','${item.phone}','${item.room_type}','${item.duration}','${item.applied_date}')">accept</button>
+            <button onclick="Cancel(${item.id})">cancel</button>
+            </td>
             </tr>`;
         tbody.innerHTML += row;
     });
@@ -49,10 +52,43 @@ fetch(apiUrl)
     .catch(error => {
         console.log('Fetch error:', error);
     });
+function Cancel(id) {
+    fetch(`http://localhost:8000/api/admin/bookings/${id}`, { method: "DELETE" }).then(response => {
+        return response.json();
+    }).then(response => {
+        console.log("🚀 ~ file: list.js:61 ~ Cancel ~ response:", response)
+    }).catch(error => {
+        console.log("🚀 ~ file: list.js:61 ~ fetch ~ error:", error)
+    })
 
+}
 function AcceptData(id, name, email, phone, room_type, duration, applied_date) {
-    // fetch("http://localhost:8000/api/admin/bookings", {
-    //     method: 'POST',
+    const data = {
+        id, name, email, phone, room_type, duration, applied_date
+    }
 
-    // })
+    fetch('http://localhost:8000/api/admin/bookings', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json', // Set the appropriate content type for your data
+            // Add any other headers if needed
+        },
+        body: JSON.stringify(data), // Convert the data object to a JSON string
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(responseData => {
+            if (!responseData) {
+                console.error('Empty response received');
+            } else {
+                console.log(responseData);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
