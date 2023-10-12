@@ -1,5 +1,5 @@
 let nav = document.createElement('div')
-nav.classList.add('bg-blue-400','sticky','h-fit','top-0')
+nav.classList.add('bg-blue-400','sticky','h-fit','top-0','py-2')
 let navBtn = document.createElement('button')
 let navSpan = document.createElement('span')
 navSpan.classList.add('material-symbols-outlined');
