@@ -1,7 +1,23 @@
+let nav = document.createElement('div')
+nav.classList.add('bg-blue-400','sticky','h-fit','top-0','py-2')
+let navBtn = document.createElement('button')
+let navSpan = document.createElement('span')
+navSpan.classList.add('material-symbols-outlined');
+navSpan.style.cssText = "color: white;padding: 10px 10px;"
+navSpan.innerHTML = 'menu'
+navBtn.append(navSpan);
+navBtn.addEventListener('click', () => {
+    bookingSpanText.classList.remove('mx-2','py-2','text-lg');
+    bookingListBtn.classList.remove('mx-16','my-2')
+    bookingBtn.classList.remove('mx-10','my-6')
+})
+nav.append(navBtn);
+let bd = document.getElementById('bd')
+
+bd.append(nav)
+
 let side = document.getElementById('side')
-side.classList.add('w-[25%]')
 let sidebar = document.createElement('div')
-sidebar.classList.add('w-full','px-3','mx-4','my-12',)
 
 let bookingBtn = document.createElement('button')
 let bookingSpan = document.createElement('span')

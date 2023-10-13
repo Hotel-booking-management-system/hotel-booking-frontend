@@ -25,7 +25,7 @@ function getHourWithAMPM(hour) {
     return formattedHour + suffix;
 }
 
-
+let currentBtn = null;
 let i = null;
 fetch(apiUrl)
     .then(response => {
@@ -46,20 +46,22 @@ fetch(apiUrl)
         });
         for (const roomName in dataByName) {
             const btn = document.createElement('button');
-            btn.id = roomName;
             btn.addEventListener('click', () => {
                 room.innerHTML = '';
                 const getdata = dataByName[roomName] ?? dataByName['single room'];
+                if(currentBtn) {
+                    currentBtn.classList.remove("bg-blue-600","text-white");
+                }
+                btn.classList.add("bg-blue-600","text-white");
+                currentBtn = btn;
                 for (const roomType in getdata) {
                     if (getdata.hasOwnProperty(roomType)) {
                         const roomData = getdata[roomType];
-                        const rooms = dataByName[roomType];
                         const card = createRoomCard(roomData);
                         room.append(card)
                     }
                 }
                  })
-                
             btn.classList.add('bg-white','px-5','py-2','border-r','border-r-gray-300','rounded-md','border-l','border-l-gray-300','border-t','border-t-gray-300');
             btn.textContent = roomName;
             divBtn.append(btn);

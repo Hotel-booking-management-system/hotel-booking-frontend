@@ -30,6 +30,7 @@ document.getElementById('upload-form').addEventListener('submit', function (e) {
     } else {
         console.log(responseData);
     }
+    window.location.assign('./admin/dashboard.html');
 })
 .catch(error => {
     console.error('Error:', error);

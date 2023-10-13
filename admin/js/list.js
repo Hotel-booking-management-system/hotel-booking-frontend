@@ -22,15 +22,23 @@ function createTable(data) {
         const dateObject = new Date(item.applied_date);
         const row = `
         <tr class="border-b text-sm border-b-gray-200">
-            <td class="px-4 py-2">${item.name}</td>
-            <td class="px-4 py-2">${item.email}</td>
-            <td class="px-4 py-2">${item.phone}</td>
-            <td class="px-4 py-2">${item.room_type}</td>
-            <td class="px-4 py-2">${item.duration}</td>
-            <td class="px-4 py-2">${month[dateObject.getMonth()]} ${getDayWithSuffix(dateObject.getDate())}</td>
-            <td class="px-4 py-2">
-            <button onclick="AcceptData(${item.id},'${item.name}','${item.email}','${item.phone}','${item.room_type}','${item.duration}','${item.applied_date}')">accept</button>
-            <button onclick="Cancel(${item.id})">cancel</button>
+            <td class="px-4 py-4">${item.name}</td>
+            <td class="px-4 py-4">${item.email}</td>
+            <td class="px-4 py-4">${item.phone}</td>
+            <td class="px-4 py-4">${item.room_type}</td>
+            <td class="px-4 py-4">${item.duration}</td>
+            <td class="px-4 py-4">${month[dateObject.getMonth()]} ${getDayWithSuffix(dateObject.getDate())}</td>
+            <td class="px-4 py-4 flex">
+            <button class="flex items-center" onclick="AcceptData(${item.id},'${item.name}','${item.email}','${item.phone}','${item.room_type}','${item.duration}','${item.applied_date}')">
+            <span style="color:#FFFFFF;background-color:#000000;border-radius: 100%;font-size:10px;padding: 1px;"  class="material-symbols-outlined">
+                done
+            </span>
+            <span class="mx-3">Accept</span></button>
+            <button class=" flex items-center mx-4" onclick="Cancel(${item.id})">
+            <span style="color:#FFFFFF;background-color:#000000;border-radius: 100%;font-size:10px;padding: 1px;" class="material-symbols-outlined">
+                close
+            </span>           
+            <span class="mx-3">Cancel</span></button>
             </td>
             </tr>`;
         tbody.innerHTML += row;
@@ -84,6 +92,7 @@ function AcceptData(id, name, email, phone, room_type, duration, applied_date) {
             } else {
                 console.log(responseData);
             }
+            window.location.reload();
         })
         .catch(error => {
             console.error('Error:', error);
