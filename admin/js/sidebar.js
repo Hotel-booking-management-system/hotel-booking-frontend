@@ -1,6 +1,23 @@
+let nav = document.createElement('div')
+nav.classList.add('bg-blue-400','sticky','h-fit','top-0','py-2')
+let navBtn = document.createElement('button')
+let navSpan = document.createElement('span')
+navSpan.classList.add('material-symbols-outlined');
+navSpan.style.cssText = "color: white;padding: 10px 10px;"
+navSpan.innerHTML = 'menu'
+navBtn.append(navSpan);
+navBtn.addEventListener('click', () => {
+    bookingSpanText.classList.remove('mx-2','py-2','text-lg');
+    bookingListBtn.classList.remove('mx-16','my-2')
+    bookingBtn.classList.remove('mx-10','my-6')
+})
+nav.append(navBtn);
+let bd = document.getElementById('bd')
+
+bd.append(nav)
+
 let side = document.getElementById('side')
 let sidebar = document.createElement('div')
-sidebar.classList.add('w-[15%]','px-3','mx-4','my-12')
 
 let bookingBtn = document.createElement('button')
 let bookingSpan = document.createElement('span')
@@ -21,7 +38,7 @@ let bookingListSpanText = document.createElement('span')
 bookingListSpanText.classList.add('mx-2','py-2','text-lg')
 bookingListSpanText.append('List')
 bookingListBtn.classList.add('flex','items-center','mx-16','my-2')
-bookingListBtn.href = './dashboard.html'
+bookingListBtn.href = './room.html'
 bookingListBtn.append(bookingListSpan,bookingListSpanText)
 
 bookingBtn.addEventListener("click", () =>{
@@ -47,7 +64,7 @@ let roomListSpanText = document.createElement('span')
 roomListSpanText.classList.add('mx-2','py-2','text-lg')
 roomListSpanText.append('List')
 roomListBtn.classList.add('flex','items-center','mx-16','my-2')
-roomListBtn.href = './room.html'
+roomListBtn.href = './list.html'
 roomListBtn.append(roomListSpan,roomListSpanText)
 
 
