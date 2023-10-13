@@ -1,6 +1,7 @@
 let side = document.getElementById('side')
+side.classList.add('w-[25%]')
 let sidebar = document.createElement('div')
-sidebar.classList.add('w-[15%]','px-3','mx-4','my-12')
+sidebar.classList.add('w-full','px-3','mx-4','my-12',)
 
 let bookingBtn = document.createElement('button')
 let bookingSpan = document.createElement('span')
@@ -21,7 +22,7 @@ let bookingListSpanText = document.createElement('span')
 bookingListSpanText.classList.add('mx-2','py-2','text-lg')
 bookingListSpanText.append('List')
 bookingListBtn.classList.add('flex','items-center','mx-16','my-2')
-bookingListBtn.href = './dashboard.html'
+bookingListBtn.href = './room.html'
 bookingListBtn.append(bookingListSpan,bookingListSpanText)
 
 bookingBtn.addEventListener("click", () =>{
@@ -47,7 +48,7 @@ let roomListSpanText = document.createElement('span')
 roomListSpanText.classList.add('mx-2','py-2','text-lg')
 roomListSpanText.append('List')
 roomListBtn.classList.add('flex','items-center','mx-16','my-2')
-roomListBtn.href = './room.html'
+roomListBtn.href = './list.html'
 roomListBtn.append(roomListSpan,roomListSpanText)
 
 

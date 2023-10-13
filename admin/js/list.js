@@ -6,7 +6,6 @@ const month = [
     "July", "August", "September", "October", "November", "December"
 ];
 
-// Function to get day with a suffix (e.g., 1st, 2nd, 3rd, 4th)
 function getDayWithSuffix(date) {
     const day = date;
     const suffix =
@@ -17,20 +16,19 @@ function getDayWithSuffix(date) {
     return day + suffix;
 }
 
-// Function to create and populate the table
 function createTable(data) {
-    tbody.innerHTML = ''; // Clear the table before populating
+    tbody.innerHTML = '';
     data.forEach(item => {
         const dateObject = new Date(item.applied_date);
         const row = `
-        <tr>
-            <td>${item.name}</td>
-            <td>${item.email}</td>
-            <td>${item.phone}</td>
-            <td>${item.room_type}</td>
-            <td>${item.duration}</td>
-            <td>${month[dateObject.getMonth()]} ${getDayWithSuffix(dateObject.getDate())}</td>
-            <td>
+        <tr class="border-b text-sm border-b-gray-200">
+            <td class="px-4 py-2">${item.name}</td>
+            <td class="px-4 py-2">${item.email}</td>
+            <td class="px-4 py-2">${item.phone}</td>
+            <td class="px-4 py-2">${item.room_type}</td>
+            <td class="px-4 py-2">${item.duration}</td>
+            <td class="px-4 py-2">${month[dateObject.getMonth()]} ${getDayWithSuffix(dateObject.getDate())}</td>
+            <td class="px-4 py-2">
             <button onclick="AcceptData(${item.id},'${item.name}','${item.email}','${item.phone}','${item.room_type}','${item.duration}','${item.applied_date}')">accept</button>
             <button onclick="Cancel(${item.id})">cancel</button>
             </td>
@@ -38,7 +36,6 @@ function createTable(data) {
         tbody.innerHTML += row;
     });
 }
-// Fetch data from the API
 fetch(apiUrl)
     .then(response => {
         if (!response.ok) {
@@ -70,10 +67,10 @@ function AcceptData(id, name, email, phone, room_type, duration, applied_date) {
     fetch('http://localhost:8000/api/admin/bookings', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json', // Set the appropriate content type for your data
-            // Add any other headers if needed
+            'Content-Type': 'application/json',
+           
         },
-        body: JSON.stringify(data), // Convert the data object to a JSON string
+        body: JSON.stringify(data),
     })
         .then(response => {
             if (!response.ok) {

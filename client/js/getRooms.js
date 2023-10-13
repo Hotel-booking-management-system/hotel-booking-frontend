@@ -35,10 +35,10 @@ fetch(apiUrl)
 function createRoomCard(data, rooms) {
     const card = document.createElement('a');
     card.href = './booking.html';
-    card.classList.add('bg-blue-500', 'p-6', 'w-[30%]', 'rounded-xl', 'text-white','my-3','max-sm:w-[95%]');
+    card.classList.add('bg-blue-500', 'p-6', 'w-[70%]', 'rounded-xl', 'text-white','my-3','max-sm:w-[95%]','flex','max-sm:block');
 
     const img = document.createElement('img');
-    img.classList.add('rounded-lg', 'w-full',);
+    img.classList.add('rounded-lg', 'w-72','h-48');
     img.src = `http://localhost:8000/public/images/${data.image}`;
 
     const h1 = document.createElement('h1');
@@ -48,7 +48,7 @@ function createRoomCard(data, rooms) {
     const h2 = document.createElement('h2');
     if (rooms) {
         h2.textContent = `${rooms} Rooms available`;
-        h2.classList.add('text-green-400')
+        h2.classList.add('text-green-400',)
     }else{
         h2.textContent = `${rooms} Rooms available`;
         h2.classList.add('text-red-400')
@@ -67,8 +67,10 @@ function createRoomCard(data, rooms) {
     h5.textContent = `Accessories - ${data.accessories}`;
     h5.classList.add('py-2','max-sm:py-1.5')
 
-
-    card.append(img, h1, h2, h3, h4, h5);
+    let div = document.createElement('div')
+    div.classList.add('w-[50%]','px-10','max-sm:w-full')
+    div.append(h1,h2,h3,h4,h5)
+    card.append(img,div);
 
     return card;
 }
