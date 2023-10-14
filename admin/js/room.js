@@ -26,7 +26,6 @@ function getHourWithAMPM(hour) {
 }
 
 let currentBtn = null;
-let i = null;
 fetch(apiUrl)
     .then(response => {
         if (!response.ok) {
@@ -48,11 +47,11 @@ fetch(apiUrl)
             const btn = document.createElement('button');
             btn.addEventListener('click', () => {
                 room.innerHTML = '';
-                const getdata = dataByName[roomName] ?? dataByName['single room'];
+                const getdata = dataByName[roomName] ?? dataByName[roomName];
                 if(currentBtn) {
-                    currentBtn.classList.remove("bg-blue-600","text-white");
+                    currentBtn.classList.remove('bg-sky-700','text-white');
                 }
-                btn.classList.add("bg-blue-600","text-white");
+                btn.classList.add('text-white','bg-sky-700');
                 currentBtn = btn;
                 for (const roomType in getdata) {
                     if (getdata.hasOwnProperty(roomType)) {
