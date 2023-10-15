@@ -20,15 +20,31 @@ function createTable(data) {
     tbody.innerHTML = '';
     data.forEach(item => {
         const dateObject = new Date(item.applied_date);
+        function DateFormat(days) {
+            if (days == 30) {
+                return 1 + " Month";
+            } else if (item.duration > 7) {
+                let weeks = Math.floor(days / 7);
+                let remainDays = days % 7;
+                let weekFormat = weeks == 1 ? weeks + " Week " : weeks + " Weeks ";
+                if (remainDays != 0) {
+                    let dayFormat = remainDays == 1 ? remainDays + " Day" : remainDays + " Days";
+                    return weekFormat + dayFormat;
+                }
+                return weekFormat;
+            } else {
+                return days + " Days";
+            }
+        }
         const row = `
         <tr class="border-b text-sm border-b-gray-200">
-            <td class="px-4 py-4">${item.name}</td>
-            <td class="px-4 py-4">${item.email}</td>
-            <td class="px-4 py-4">${item.phone}</td>
-            <td class="px-4 py-4">${item.room_type}</td>
-            <td class="px-4 py-4">${item.duration}</td>
-            <td class="px-4 py-4">${month[dateObject.getMonth()]} ${getDayWithSuffix(dateObject.getDate())}</td>
-            <td class="px-4 py-4 flex">
+            <td class="p-4">${item.name}</td>
+            <td class="p-4">${item.email}</td>
+            <td class="p-4">${item.phone}</td>
+            <td class="p-4">${item.room_type}</td>
+            <td class="p-4">${DateFormat(item.duration)}</td>
+            <td class="p-4">${month[dateObject.getMonth()]} ${getDayWithSuffix(dateObject.getDate())}</td>
+            <td class="p-4 flex">
             <button class="flex items-center" onclick="AcceptData(${item.id},'${item.name}','${item.email}','${item.phone}','${item.room_type}','${item.duration}','${item.applied_date}')">
             <span style="color:#FFFFFF;background-color:#000000;border-radius: 100%;font-size:10px;padding: 1px;"  class="material-symbols-outlined">
                 done
@@ -76,7 +92,7 @@ function AcceptData(id, name, email, phone, room_type, duration, applied_date) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-           
+
         },
         body: JSON.stringify(data),
     })
